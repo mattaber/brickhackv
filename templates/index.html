@@ -22,7 +22,12 @@
       <span style="color: #0f00bf">Watcher</span>
     </h1>
     {% if item_list %}
+    <form method="POST" align="center">
+        <input name="text">
+        <input type="submit">
+    </form>
         {% for i in range(length) %}
+
         <a href={{ item_list[i].link }}>
             <div class="well" align="center">
                 <img src={{ item_list[i].image }} id="image">
