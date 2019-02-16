@@ -11,27 +11,20 @@
 </head>
     <body>
     <h1 style="font-family:helvetica;font-style:italic;font-size:100px" align="center">
-      <span style="color: #30d2ff">
-      Deal</span><span style="color: #0f00bf">Watcher
-      </span>
+      <span style="color: #30d2ff">Deal</span>
+      <span style="color: #0f00bf">Watcher</span>
     </h1>
-        {% if item_list %}
-            {% for item_elem in item_names %}
-                <h1> {{ item_elem }} </h1>
-            {% endfor %}
-
-            {% for item_elem in item_costs %}
-                <h2> {{ item_elem }} </h2>
-            {% endfor %}
-
-            {% for item_elem in item_savings %}
-                <h3> {{ item_elem }} </h3>
-            {% endfor %}
-        {% else %}
-            <form method="POST">
-                <input name="text">
-                <input type="submit">
-            </form>
-        {% endif %}
+    {% if item_names %}
+        {% for i in range(length) %}
+            <h1> {{ item_names[i] }} </h1>
+            <h2> {{ item_costs[i] }} </h2>
+            <h3> {{ item_savings[i] }} </h3>
+        {% endfor %}
+    {% else %}
+        <form method="POST">
+            <input name="text">
+            <input type="submit">
+        </form>
+    {% endif %}
     </body>
 </html>

@@ -40,4 +40,4 @@ def index(item_names = [], item_costs = [], item_savings = []):
         item_names      = [item.name for item in item_list]
         item_costs      = [item.cost for item in item_list]
         item_savings    = [item.savings for item in item_list]
-    return render_template('index.html', item_names = item_names, item_costs = item_costs, item_savings = item_savings)
+    return render_template('index.html', item_names = item_names, item_costs = item_costs, item_savings = item_savings, length = len(item_names))
