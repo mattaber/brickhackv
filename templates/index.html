@@ -16,6 +16,7 @@
     </h1>
     {% if item_names %}
         {% for i in range(length) %}
+            <img src={{ item_images[i] }}>
             <h1> {{ item_names[i] }} </h1>
             <h2> {{ item_costs[i] }} </h2>
             <h3> {{ item_savings[i] }} </h3>
