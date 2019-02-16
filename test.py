@@ -8,8 +8,9 @@ def get_name(item_tag):
     return str(item_tag.find(class_='item-title').get_text())
 
 def get_cost(item_tag):
-    #return str(item_tag.find(class_='price').get_text())
-    return "this would be the price"
+    #if item_tag.find(class_='price-current'):
+    return item_tag.find(class_='price-current').get_text()
+    #return "this would be the price"
 
 def get_savings(item_tag):
     #return item_tag.find('price-save-percent').get_text()
@@ -28,7 +29,7 @@ def generate_items(search):
 
     page = rq.get(str)
     soup = bs(page.text, 'html.parser')
-    item_containers = soup.find_all(class_='item-container')
+    item_containers = soup.find(class_='items-view is-grid').find_all(class_='item-container')
 
     return [Item(i) for i in item_containers]
 
