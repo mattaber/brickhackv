@@ -1,0 +1,14 @@
+<!doctype html>
+
+<html>
+    <body>
+        {% if s %}
+            <h1> you entered {{ s }} </h1>
+        {% else %}
+            <form method="POST">
+                <input name="text">
+                <input type="submit">
+            </form>
+        {% endif %}
+    </body>
+</html>
