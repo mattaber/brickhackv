@@ -12,8 +12,8 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <style>
     body {background-color: #b7efff;}
-    .well {background-color: #7adfff; margin: 50px}
-    img.well {align:center;}
+    .well {background-color: #7adfff; margin: 50px;box-shadow: 10px 10px grey;border-radius: 25px;border-style: none; outline: 0;}
+    #image {box-shadow: 10px 10px grey;border:30px solid white;border-radius: 25px;}
   </style>
 </head>
     <body>
@@ -23,11 +23,13 @@
     </h1>
     {% if item_names %}
         {% for i in range(length) %}
-          <div class="well" align="center">
-            <img src={{ item_images[i] }}>
-            <h1> {{ item_names[i] }} </h1>
-            <h2> {{ item_costs[i] }} {{ item_savings[i] }} </h2>
-          </div>
+        <a href={{ item_list[i].link }}>
+            <div class="well" align="center">
+                <img src={{ item_list[i].image }} id="image">
+                            <h1> {{ item_list[i].name }} </h1>
+                            <h2> {{ item_list[i].cost }} {{ item_list[i].savings }} </h2>
+        	</div>
+        </a>
         {% endfor %}
     {% else %}
         <form method="POST">
