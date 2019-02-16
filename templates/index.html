@@ -21,13 +21,13 @@
       <span style="color: #30d2ff">Deal</span>
       <span style="color: #0f00bf">Watcher</span>
     </h1>
-    {% if item_names %}
+    {% if item_list %}
         {% for i in range(length) %}
         <a href={{ item_list[i].link }}>
             <div class="well" align="center">
                 <img src={{ item_list[i].image }} id="image">
-                            <h1> {{ item_list[i].name }} </h1>
-                            <h2> {{ item_list[i].cost }} {{ item_list[i].savings }} </h2>
+                <h1> {{ item_list[i].name }} </h1>
+                <h2> {{ item_list[i].cost }} {{ item_list[i].savings }} </h2>
         	</div>
         </a>
         {% endfor %}
