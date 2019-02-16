@@ -33,11 +33,9 @@ def generate_items(search):
     return [Item(i) for i in item_containers]
 
 @app.route('/', methods=['GET', 'POST'])
-def index(item_list = []):
+def index(ret = []):
     if(request.method == 'POST'):
         s = request.form['text']
         item_list = generate_items(s)
         ret = [item.name for item in item_list]
-        return "\n\n".join(ret)
-    else:
-        return render_template('index.html')
+    return render_template('index.html', item_list = ret)

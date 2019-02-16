@@ -2,8 +2,10 @@
 
 <html>
     <body>
-        {% if s %}
-            <h1> you entered {{ s }} </h1>
+        {% if item_list %}
+            {% for item_elem in item_list %}
+                <h1> {{ item_elem }} </h1>
+            {% endfor %}
         {% else %}
             <form method="POST">
                 <input name="text">
