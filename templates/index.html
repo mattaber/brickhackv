@@ -3,8 +3,16 @@
 <html>
     <body>
         {% if item_list %}
-            {% for item_elem in item_list %}
+            {% for item_elem in item_names %}
                 <h1> {{ item_elem }} </h1>
+            {% endfor %}
+
+            {% for item_elem in item_costs %}
+                <h2> {{ item_elem }} </h2>
+            {% endfor %}
+
+            {% for item_elem in item_savings %}
+                <h3> {{ item_elem }} </h3>
             {% endfor %}
         {% else %}
             <form method="POST">

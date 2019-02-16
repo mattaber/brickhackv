@@ -5,15 +5,15 @@ from flask import Flask, request, render_template
 app = Flask(__name__) # replace with wrapper
 
 def get_name(item_tag):
-    return str(item_tag.find(class_='item-title').contents[0])
+    return str(item_tag.find(class_='item-title').get_text())
 
 def get_cost(item_tag):
-    #return item_tag.find(class_='price-current-label').find('strong').contents[0]
-    return "hello world 1"
+    #return str(item_tag.find(class_='price').get_text())
+    return "this would be the price"
 
 def get_savings(item_tag):
-    #return item_tag.find('price-save-percent').contents[0]
-    return "hello world"
+    #return item_tag.find('price-save-percent').get_text()
+    return "hel;lo world"
 
 class Item:
     def __init__(self, item_tag):
@@ -33,9 +33,11 @@ def generate_items(search):
     return [Item(i) for i in item_containers]
 
 @app.route('/', methods=['GET', 'POST'])
-def index(ret = []):
+def index(item_names = [], item_costs = [], item_savings = []):
     if(request.method == 'POST'):
         s = request.form['text']
         item_list = generate_items(s)
-        ret = [item.name for item in item_list]
-    return render_template('index.html', item_list = ret)
+        item_names      = [item.name for item in item_list]
+        item_costs      = [item.cost for item in item_list]
+        item_savings    = [item.savings for item in item_list]
+    return render_template('index.html', item_names = item_names, item_costs = item_costs, item_savings = item_savings)
