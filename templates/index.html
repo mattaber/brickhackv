@@ -12,8 +12,9 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <style>
     body {background-color: #b7efff;}
-    .well {background-color: #7adfff; margin: 50px;box-shadow: 10px 10px grey;border-radius: 25px;border-style: none; outline: 0;}
+    .well {background-color: #7adfff;box-shadow: 10px 10px grey;border-radius: 25px;border-style: none; outline: 0;}
     #image {box-shadow: 10px 10px grey;border:30px solid white;border-radius: 25px;}
+    #link {display: block;margin: 50px}
   </style>
 </head>
     <body>
@@ -28,7 +29,7 @@
     </form>
         {% for i in range(length) %}
 
-        <a href={{ item_list[i].link }}>
+        <a href={{ item_list[i].link }} id = "link">
             <div class="well" align="center">
                 <img src={{ item_list[i].image }} id="image">
                 <h1> {{ item_list[i].name }} </h1>
