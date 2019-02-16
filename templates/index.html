@@ -5,8 +5,15 @@
   DealWatcher
 </title>
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
   <style>
     body {background-color: #b7efff;}
+    .well {background-color: #7adfff; margin: 50px}
+    img.well {align:center;}
   </style>
 </head>
     <body>
@@ -16,10 +23,12 @@
     </h1>
     {% if item_names %}
         {% for i in range(length) %}
+          <div class="well" align="center">
             <img src={{ item_images[i] }}>
             <h1> {{ item_names[i] }} </h1>
             <h2> {{ item_costs[i] }} </h2>
             <h3> {{ item_savings[i] }} </h3>
+          </div>
         {% endfor %}
     {% else %}
         <form method="POST">
