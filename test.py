@@ -12,12 +12,16 @@ def get_name(item_tag):
 
 def get_cost(item_tag):
     #if item_tag.find(class_='price-current'):
-    return item_tag.find(class_='price-current').get_text()
+    if( "|" in str(item_tag.find(class_='price-current').get_text())):
+        return str(item_tag.find(class_='price-current').get_text())[4:]
+    return str(item_tag.find(class_='price-current').get_text())
     #return "this would be the price"
 
 def get_savings(item_tag):
     #return item_tag.find('price-save-percent').get_text()
-    return "hel;lo world"
+    #if item_tag.find(class_="price-save-percent") != None:
+    return str(item_tag.find(class_="price-save-percent").get_text()) + " off"
+    #return "Hello World"
 
 class Item:
     def __init__(self, item_tag):
@@ -29,13 +33,14 @@ class Item:
 
 def generate_items(search):
     words = search.split(' ')
-    str = 'https://www.newegg.com/Product/ProductList.aspx?Submit=ENE&DEPA=0&Order=BESTMATCH&Description=' + '+'.join(words) + '&N=-1&isNodeId=1'
+    str = 'https://www.newegg.com/Product/ProductList.aspx?Submit=ENE&DEPA=0&Order=BESTMATCH&Description=' + '+'.join(words) + '&N=4803&isNodeId=1'
 
     page = rq.get(str)
     soup = bs(page.text, 'html.parser')
     item_containers = soup.find(class_='items-view is-grid').find_all(class_='item-container')
+    #print(len(item_containers))
 
-    return [Item(i) for i in item_containers]
+    return [Item(i) for i in item_containers if i.find(class_="price-save-percent")]
 
 @app.route('/', methods=['GET', 'POST'])
 def index(item_images = [], item_names = [], item_costs = [], item_savings = []):
