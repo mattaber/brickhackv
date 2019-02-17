@@ -22,7 +22,15 @@
         <input name="text">
         <input type="submit">
     </form>
-        {% for i in range(length) %}
+    <a href={{ item_list[min_price_index].link }} id = "link">
+        <div class="well" align="center">
+            <img src={{ item_list[min_price_index].image }} id="image">
+            <h1 id="featured">~ FEATURED ITEM ~</h1>
+            <h1> {{ item_list[min_price_index].name }} </h1>
+            <h2> {{ item_list[min_price_index].cost }} <span>{{ item_list[min_price_index].savings }}</span> </h2>
+        </div>
+    </a>
+        {% for i in range(length) if i != min_price_index%}
 
         <a href={{ item_list[i].link }} id = "link">
             <div class="well" align="center">

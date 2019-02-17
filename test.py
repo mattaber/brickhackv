@@ -15,7 +15,7 @@ def get_image(item_tag, website):
     if(website == "Newegg"):
         return "http:" + str(item_tag.find('img')['src'])
     elif(website == "Amazon"):
-        return ""#"http:" + str(item_tag.find('img')['src'])
+        return ""#http:" + str(item_tag.find('img')['src'])
 
 def get_name(item_tag, website):
     if(website == "Newegg"):
@@ -31,7 +31,7 @@ def get_cost(item_tag, website):
         return temp_str
     elif(website == "Amazon"):
         #print("UHH = " + str(item_tag.find('span', {'class' : 'a-row a-spacing-none'}).get_text()))
-        return "" #str(item_tag.find('span', {'class' : 'a-row a-spacing-none'}).get_text())
+        return ""#str(item_tag.find(class_="a-offscreen").get_text())
 
 def get_savings(item_tag, website):
     if(website == "Newegg"):
@@ -60,30 +60,29 @@ def generate_items(search, website):
     words = search.split(' ')
     if(website == "Newegg"):
         str = 'https://www.newegg.com/Product/ProductList.aspx?Submit=ENE&DEPA=0&Order=BESTMATCH&Description=' + '+'.join(words) + '&N=4803&isNodeId=1'
-
         page = rq.get(str)
         soup = bs(page.text, 'html.parser')
         item_containers = soup.find(class_='items-view is-grid').find_all(class_='item-container')
     elif(website == "Amazon"):
-        str = "https://www.amazon.com/s/ref=nb_sb_noss_1?url=search-alias%3Daps&field-keywords=" + '+'.join(words)
-
+        str = 'https://www.amazon.com/s?k=' + '+'.join(words)
+        #print("url="+str)
         page = rq.get(str)
         soup = bs(page.text, 'html.parser')
-        item_containers = soup.find(class_="a-row s-result-list-parent-container").find_all(class_='s-item-container') # ISSUE: THIS PRODUCES AN EMPTY LIST; JAVASCRIPT PROBABLY RENDERS THE HTML :(
-        print(item_containers)
+        item_containers = soup.find_all(class_='s-item-container') # ISSUE: THIS PRODUCES AN EMPTY LIST; JAVASCRIPT PROBABLY RENDERS THE HTML :(
+        #print(item_containers)
 
     return [Item(i,website) for i in item_containers if has_savings(i,website)]
 
 @app.route('/', methods=['GET', 'POST'])
-def index(item_list = []):
+def index(item_list = [], min_price_index=0):
     if(request.method == 'POST'):
         s = request.form['text']
         #item_list = generate_items(s)
         temp_list1 = generate_items(s, "Newegg")
         temp_list2 = generate_items(s, "Amazon")
-        item_list = temp_list2
+        item_list = temp_list1
         item_list.sort(key = lambda x : int(x.savings[:-5]), reverse=True)
-    #prices = [float(item.cost[item.cost.find("$")+1:item.cost.find(".")+3]) for item in item_list]
-    #min_price = min(prices)                   # Useful for displaying the lowest item in the html
-    #min_price_index = prices.index(min_price) # ^
-    return render_template('index.html', item_list = item_list, length = len(item_list))
+        prices = [float(item.cost[item.cost.find("$")+1:item.cost.find(".")+3]) for item in item_list]
+        min_price = min(prices)                   # Useful for displaying the lowest item in the html
+        min_price_index = prices.index(min_price) # ^
+    return render_template('index.html', item_list = item_list, length = len(item_list), min_price_index=min_price_index)
