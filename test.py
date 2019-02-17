@@ -14,9 +14,11 @@ def get_name(item_tag):
     return str(item_tag.find(class_='item-title').get_text())
 
 def get_cost(item_tag):
-    if("|" in str(item_tag.find(class_='price-current').get_text())):
-        return str(item_tag.find(class_='price-current').get_text())[4:]
-    return str(item_tag.find(class_='price-current').get_text())
+
+    temp_str = str(item_tag.find(class_='price-current').get_text())
+    if("|" in temp_str):
+        temp_str = temp_str[4:]
+    return temp_str
 
 def get_savings(item_tag):
     return str(item_tag.find(class_="price-save-percent").get_text()) + " off"
@@ -50,4 +52,7 @@ def index(item_list = []):
         s = request.form['text']
         item_list = generate_items(s)
         item_list.sort(key = lambda x : int(x.savings[:-5]), reverse=True)
+    prices = [float(item.cost[item.cost.find("$")+1:item.cost.find(".")+3]) for item in item_list]
+    min_price = min(prices)                   # Useful for displaying the lowest item in the html
+    min_price_index = prices.index(min_price) # ^
     return render_template('index.html', item_list = item_list, length = len(item_list))
