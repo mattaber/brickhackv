@@ -1,6 +1,6 @@
 body {
-    /*background-color: #f5fbe5;*/
-    background-color: #f7ebce;
+    /*background-color: #f7ebce;*/
+    background-color: #f6f8f2;
 }
 
 form {
@@ -10,28 +10,34 @@ form {
 }
 
 .well {
-    background-color: #6bc5d2;
+    background-color: #187f8b;
     box-shadow: 10px 10px grey;
     border-radius: 25px;
     border-style: none;
     outline: 0;
+    padding-left: 15%;
+    padding-right: 15%;
+    padding-top: 5%;
+    padding-bottom: 5%;
 }
 
 .well:hover {
-    background-color: #30d2ff;
-    border: 2px solid black;
+    background-color: #538584;
+    border: 2px solid #187f8b;
 }
 
 .well h1 {
-    color: #2b2826 !important;
+    color: #f6f8f2 !important;
+    font-size: 22pt;
 }
 
 .well h2 {
-    color: #139f52 !important;
+    color: #96da89 !important;
+    font-size: 32pt;
 }
 
 .well h2 span {
-    color: #c55046 !important;
+    color: #f48494 !important;
 }
 
 #header {
@@ -45,7 +51,8 @@ form {
 }
 
 #watcher {
-    color: #6bc5d2;
+    /*color: #6bc5d2;*/
+    color: #187f8b;
 }
 
 #image {
@@ -60,6 +67,10 @@ form {
     margin-bottom: 50px;
     margin-left: 200px;
     margin-right: 200px;
+}
+
+#link:hover {
+    text-decoration: none !important;
 }
 
 /*
