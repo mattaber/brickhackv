@@ -8,19 +8,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href={{ url_for('static', filename='stylesheet.css') }}>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-  <style>
-    body {background-color: #b7efff;}
-    .well {background-color: #7adfff;box-shadow: 10px 10px grey;border-radius: 25px;border-style: none; outline: 0;}
-    #image {box-shadow: 10px 10px grey;border:30px solid white;border-radius: 25px;}
-    #link {display: block;margin: 50px}
-  </style>
 </head>
     <body>
-    <h1 style="font-family:helvetica;font-style:italic;font-size:100px" align="center">
-      <span style="color: #30d2ff">Deal</span>
-      <span style="color: #0f00bf">Watcher</span>
+    <h1 id="header" align="center">
+      <span id="deal">Deal</span>
+      <span id="watcher">Watcher</span>
     </h1>
     {% if item_list %}
     <form method="POST" align="center">
@@ -33,7 +28,7 @@
             <div class="well" align="center">
                 <img src={{ item_list[i].image }} id="image">
                 <h1> {{ item_list[i].name }} </h1>
-                <h2> {{ item_list[i].cost }} {{ item_list[i].savings }} </h2>
+                <h2> {{ item_list[i].cost }} <span>{{ item_list[i].savings }}</span> </h2>
         	</div>
         </a>
         {% endfor %}
